@@ -8,6 +8,14 @@ func BenchmarkUUID(b *testing.B) {
 	}
 }
 
+func BenchmarkUUIDParallel(b *testing.B) {
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			UUID()
+		}
+	})
+}
+
 func dedup(x [][]byte) [][]byte {
 	visited := map[string]bool{}
 	r := [][]byte{}
