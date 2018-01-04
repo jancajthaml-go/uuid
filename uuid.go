@@ -1,3 +1,7 @@
+// Information about the algorithm is available on Wikipedia
+//
+// https://en.wikipedia.org/wiki/Universally_unique_identifier
+//
 package main
 
 import "crypto/rand"
@@ -10,7 +14,7 @@ func UUID() []byte {
 
 	_, err := rand.Read(r)
 	if err != nil {
-		panic(0)
+		panic("unable to read from /dev/urandom")
 	}
 
 	var x = [36]byte{
