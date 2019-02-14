@@ -2,19 +2,23 @@
 //
 // https://en.wikipedia.org/wiki/Universally_unique_identifier
 //
-package main
+package uuid
 
-import "crypto/rand"
+import (
+	"crypto/rand"
+	"fmt"
+)
 
 const hex_low string = "0123456789abcdef"
 const hex_high string = "0000000000000000111111111111111122222222222222223333333333333333444444444444444455555555555555556666666666666666777777777777777788888888888888889999999999999999aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbccccccccccccccccddddddddddddddddeeeeeeeeeeeeeeeeffffffffffffffff"
 
-func UUID() []byte {
+// Generate uuid v4
+func Generate() ([]byte, error) {
 	var r []byte = make([]byte, 16)
 
 	_, err := rand.Read(r)
 	if err != nil {
-		panic("unable to read from /dev/urandom")
+		return nil, fmt.Errorf("unable to read from /dev/urandom")
 	}
 
 	var x = [36]byte{
@@ -56,5 +60,5 @@ func UUID() []byte {
 		hex_low[int(r[15]&0x0F)],
 	}
 
-	return x[:]
+	return x[:], nil
 }
