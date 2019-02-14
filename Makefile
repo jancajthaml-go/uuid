@@ -1,14 +1,10 @@
 .PHONY: all
-all: build benchmark
-
-.PHONY: build
-build:
-	@go build uuid.go main.go
+all: test benchmark
 
 .PHONY: test
 test:
-	@go test
+	@go test -v ./...
 
 .PHONY: benchmark
 benchmark:
-	@go test -bench=.
+	@go test -v ./... -benchmem -bench=.
