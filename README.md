@@ -14,10 +14,8 @@ uuid.Generate()
 
 ### Performance ###
 
-```
-BenchmarkGenerate-4          2000000  574 ns/op  64 B/op  2 allocs/op
-BenchmarkGenerateParallel-4  2000000  622 ns/op  64 B/op  2 allocs/op
-```
+- 48 B/op
+- 1 allocs/op
 
 verify your performance by running `make benchmark`
 

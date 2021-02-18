@@ -14,51 +14,49 @@ const hex_high string = "0000000000000000111111111111111122222222222222223333333
 
 // Generate uuid v4
 func Generate() ([]byte, error) {
-	var r []byte = make([]byte, 16)
+	r := make([]byte, 36)
 
 	_, err := rand.Read(r)
 	if err != nil {
 		return nil, fmt.Errorf("unable to read from /dev/urandom")
 	}
 
-	var x = [36]byte{
-		hex_high[int(r[0]&0xFF)],
-		hex_low[int(r[0]&0x0F)],
-		hex_high[int(r[1]&0xFF)],
-		hex_low[int(r[1]&0x0F)],
-		hex_high[int(r[2]&0xFF)],
-		hex_low[int(r[2]&0x0F)],
-		hex_high[int(r[3]&0xFF)],
-		hex_low[int(r[3]&0x0F)],
-		'-',
-		hex_high[int(r[4]&0xFF)],
-		hex_low[int(r[4]&0x0F)],
-		hex_high[int(r[5]&0xFF)],
-		hex_low[int(r[5]&0x0F)],
-		'-',
-		hex_high[int(r[6]&0xFF)],
-		hex_low[int(r[6]&0x0F)],
-		hex_high[int(r[7]&0xFF)],
-		hex_low[int(r[7]&0x0F)],
-		'-',
-		hex_high[int(r[8]&0xFF)],
-		hex_low[int(r[8]&0x0F)],
-		hex_high[int(r[9]&0xFF)],
-		hex_low[int(r[9]&0x0F)],
-		'-',
-		hex_high[int(r[10]&0xFF)],
-		hex_low[int(r[10]&0x0F)],
-		hex_high[int(r[11]&0xFF)],
-		hex_low[int(r[11]&0x0F)],
-		hex_high[int(r[12]&0xFF)],
-		hex_low[int(r[12]&0x0F)],
-		hex_high[int(r[13]&0xFF)],
-		hex_low[int(r[13]&0x0F)],
-		hex_high[int(r[14]&0xFF)],
-		hex_low[int(r[14]&0x0F)],
-		hex_high[int(r[15]&0xFF)],
-		hex_low[int(r[15]&0x0F)],
-	}
-
-	return x[:], nil
+	r[35] = hex_low[int(r[15]&0x0F)]
+	r[34] = hex_high[int(r[15]&0xFF)]
+	r[33] = hex_low[int(r[14]&0x0F)]
+	r[32] = hex_high[int(r[14]&0xFF)]
+	r[31] = hex_low[int(r[13]&0x0F)]
+	r[30] = hex_high[int(r[13]&0xFF)]
+	r[29] = hex_low[int(r[12]&0x0F)]
+	r[28] = hex_high[int(r[12]&0xFF)]
+	r[27] = hex_low[int(r[11]&0x0F)]
+	r[26] = hex_high[int(r[11]&0xFF)]
+	r[25] = hex_low[int(r[10]&0x0F)]
+	r[24] = hex_high[int(r[10]&0xFF)]
+	r[23] = '-'
+	r[22] = hex_low[int(r[9]&0x0F)]
+	r[21] = hex_high[int(r[9]&0xFF)]
+	r[20] = hex_low[int(r[8]&0x0F)]
+	r[19] = hex_high[int(r[8]&0xFF)]
+	r[18] = '-'
+	r[17] = hex_low[int(r[7]&0x0F)]
+	r[16] = hex_high[int(r[7]&0xFF)]
+	r[15] = hex_low[int(r[6]&0x0F)]
+	r[14] = hex_high[int(r[6]&0xFF)]
+	r[13] = '-'
+	r[12] = hex_low[int(r[5]&0x0F)]
+	r[11] = hex_high[int(r[5]&0xFF)]
+	r[10] = hex_low[int(r[4]&0x0F)]
+	r[9] = hex_high[int(r[4]&0xFF)]
+	r[8] = '-'
+	r[7] = hex_low[int(r[3]&0x0F)]
+	r[6] = hex_high[int(r[3]&0xFF)]
+	r[5] = hex_low[int(r[2]&0x0F)]
+	r[4] = hex_high[int(r[2]&0xFF)]
+	r[3] = hex_low[int(r[1]&0x0F)]
+	r[2] = hex_high[int(r[1]&0xFF)]
+	r[1] = hex_low[int(r[0]&0x0F)]
+	r[0] = hex_high[int(r[0]&0xFF)]
+	
+	return r[0:16:16], nil
 }
