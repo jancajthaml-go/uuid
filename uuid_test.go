@@ -2,20 +2,6 @@ package uuid
 
 import "testing"
 
-func BenchmarkGenerate(b *testing.B) {
-	for n := 0; n < b.N; n++ {
-		Generate()
-	}
-}
-
-func BenchmarkGenerateParallel(b *testing.B) {
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			Generate()
-		}
-	})
-}
-
 func dedup(x [][]byte) [][]byte {
 	visited := map[string]bool{}
 	r := [][]byte{}
@@ -36,8 +22,7 @@ func TestGenerate(t *testing.T) {
 	for n := 0; n < 1000; n++ {
 		u, err := Generate()
 		if err != nil {
-			t.Errorf("expected nil error but got %+v", err)
-			return
+			t.Fatalf(err.Error())
 		}
 		s[n] = u
 	}
@@ -45,4 +30,30 @@ func TestGenerate(t *testing.T) {
 	if len(dedup(s)) != len(s) {
 		t.Errorf("duplicates generated : Set-%d Seq-%d", len(dedup(s)), len(s))
 	}
+}
+
+func TestCapacity(t *testing.T) {
+	u, err := Generate()
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+
+	if cap(u) != 16 {
+		t.Errorf("expected capacity 16 actual %d", cap(u))
+	}
+}
+
+
+func BenchmarkGenerate(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		Generate()
+	}
+}
+
+func BenchmarkGenerateParallel(b *testing.B) {
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			Generate()
+		}
+	})
 }
