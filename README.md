@@ -1,4 +1,4 @@
-## universally unique identifier v4
+## universally unique identifier
 
 [![Go Report Card](https://goreportcard.com/badge/jancajthaml-go/uuid)](https://goreportcard.com/report/jancajthaml-go/uuid)
 
