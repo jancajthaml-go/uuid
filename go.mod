@@ -1,1 +1,1 @@
-module github.com/jancajthaml-go/uuid
+module github.com/jancajthaml-go/uuidv4
