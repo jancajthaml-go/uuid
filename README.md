@@ -2,12 +2,12 @@
 
 [![Go Report Card](https://goreportcard.com/badge/jancajthaml-go/uuid)](https://goreportcard.com/report/jancajthaml-go/uuid)
 
-Algorithm generate 128bit UUID with cryptographically secure PRNG in format 8-4-4-4-12 lowercase hex digits.
+Algorithm generate 128bit UUID with cryptographically secure PRNG in RFC4122 format.
 
 ### Usage ###
 
 ```
-import "github.com/jancajthaml-go/uuid"
+import "github.com/jancajthaml-go/uuidv4"
 
 uuid.Generate()
 ```

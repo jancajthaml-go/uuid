@@ -12,7 +12,7 @@ import (
 const hex_low string = "0123456789abcdef"
 const hex_high string = "0000000000000000111111111111111122222222222222223333333333333333444444444444444455555555555555556666666666666666777777777777777788888888888888889999999999999999aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbccccccccccccccccddddddddddddddddeeeeeeeeeeeeeeeeffffffffffffffff"
 
-// Generate uuid v4
+// Generate uuid version 4 variant DCE 1.1, ISO/IEC 11578:1996
 func Generate() ([]byte, error) {
 	r := make([]byte, 36)
 
@@ -37,12 +37,12 @@ func Generate() ([]byte, error) {
 	r[22] = hex_low[int(r[9]&0x0F)]
 	r[21] = hex_high[int(r[9]&0xFF)]
 	r[20] = hex_low[int(r[8]&0x0F)]
-	r[19] = hex_high[int(r[8]&0xFF)]
+	r[19] = '8'
 	r[18] = '-'
 	r[17] = hex_low[int(r[7]&0x0F)]
 	r[16] = hex_high[int(r[7]&0xFF)]
 	r[15] = hex_low[int(r[6]&0x0F)]
-	r[14] = hex_high[int(r[6]&0xFF)]
+	r[14] = '4'
 	r[13] = '-'
 	r[12] = hex_low[int(r[5]&0x0F)]
 	r[11] = hex_high[int(r[5]&0xFF)]
@@ -58,5 +58,5 @@ func Generate() ([]byte, error) {
 	r[1] = hex_low[int(r[0]&0x0F)]
 	r[0] = hex_high[int(r[0]&0xFF)]
 	
-	return r[0:16:16], nil
+	return r, nil
 }
