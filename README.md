@@ -1,6 +1,6 @@
 ## universally unique identifier
 
-[![Go Report Card](https://goreportcard.com/badge/jancajthaml-go/uuid)](https://goreportcard.com/report/jancajthaml-go/uuid)
+[![Go Report Card](https://goreportcard.com/badge/jancajthaml-go/uuid)](https://goreportcard.com/report/jancajthaml-go/uuidv4)
 
 Algorithm generate 128bit UUID with cryptographically secure PRNG in RFC4122 format.
 
