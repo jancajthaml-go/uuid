@@ -1,6 +1,9 @@
 package uuid
 
-import "testing"
+import (
+	"testing"
+	"strconv"
+)
 
 func dedup(x [][]byte) [][]byte {
 	visited := map[string]bool{}
@@ -34,25 +37,31 @@ func TestGenerate(t *testing.T) {
 
 func TestVersion(t *testing.T) {
 	u, err := Generate()
-
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-
-	if u[14] != '4' {
-		t.Errorf("invalid version expected 4 got %c", u[14])
+	version, err := strconv.ParseUint(string(u[14]) + string(u[15]), 16, 64)
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	version = version >> 4
+	if version != 4 {
+		t.Errorf("invalid version expected 1 got %d -> %s", version, string(u))
 	}
 }
 
 func TestVariant(t *testing.T) {
 	u, err := Generate()
-
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-
-	if u[19] != '8' {
-		t.Errorf("invalid variant expected 8 got %c", u[19])
+	variant, err := strconv.ParseUint(string(u[19]) + string(u[20]), 16, 64)
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	variant = variant & 0xc0
+	if variant != 0x80 {
+		t.Errorf("invalid variant expected 8 got %d -> %s", variant, string(u))
 	}
 }
 
