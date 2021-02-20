@@ -32,14 +32,38 @@ func TestGenerate(t *testing.T) {
 	}
 }
 
+func TestVersion(t *testing.T) {
+	u, err := Generate()
+
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+
+	if u[14] != '4' {
+		t.Errorf("invalid version expected 4 got %c", u[14])
+	}
+}
+
+func TestVariant(t *testing.T) {
+	u, err := Generate()
+
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+
+	if u[19] != '8' {
+		t.Errorf("invalid variant expected 8 got %c", u[19])
+	}
+}
+
 func TestCapacity(t *testing.T) {
 	u, err := Generate()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
 
-	if cap(u) != 16 {
-		t.Errorf("expected capacity 16 actual %d", cap(u))
+	if cap(u) != 36 {
+		t.Errorf("expected capacity 36 actual %d", cap(u))
 	}
 }
 
