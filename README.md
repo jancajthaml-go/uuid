@@ -9,7 +9,7 @@ Algorithm generate 128bit UUID with cryptographically secure PRNG in RFC4122 for
 ```
 import "github.com/jancajthaml-go/uuidv4"
 
-uuid.Generate()
+uuidv4.Generate()
 ```
 
 ### Performance ###
